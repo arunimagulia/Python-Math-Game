@@ -64,28 +64,32 @@ def askquestion(index, count):
         userSolution = userAnswer(problem)
         count = checkAnswer(userSolution, solution, count)
         return count
-    else:
+    elif index is 4:
         problem = str(firstNumber) + " // " + str(secondNumber)
         solution = firstNumber // secondNumber
         userSolution = userAnswer(problem)
         count = checkAnswer(userSolution, solution, count)
         return count
-
-
-def display_result(total, correct):
+    else:
+        return 0;
+    
+def displayresult(total, correct):
     if total > 0:
         result = correct / total
 
     print("You answered", correct, "questions correctly out of", total, "questions.")
 
 def main():
+
     parser = argparse.ArgumentParser(description="Math Quiz")
+    parser.add_argument('-o', '--output', action='store_true',
+                        help="shows output and starts the game")
     args = parser.parse_args()
-    print(args.accumulate(args.integers))
+    if args.output:
+        print("This is the start of the math quiz. Good Luck!")
 
     intro()
     separator()
-
     option = userInput()
     totalscore = 0
     correct = 0
@@ -93,7 +97,7 @@ def main():
         totalscore = totalscore + 1
         correct = askquestion(option, correct)
     separator()
-    display_result(totalscore, correct)
+    displayresult(totalscore, correct)
     print("Do you want to play again? Press 1 for yes or 0 to exit")
     userinput = int(input("Enter your choice: "))
     if userinput == 1:
